@@ -1,0 +1,31 @@
+import React from 'react';
+import MagneticButton from '../components/MagneticButton';
+
+const Home = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 100px)', padding: '2rem' }}>
+      <p style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1rem', fontSize: '0.8rem' }}>
+        Building with curiosity.
+      </p>
+      <h1 style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', textAlign: 'center', marginBottom: '1.5rem', lineHeight: 1.1 }}>
+        Engineering ideas into <br /> digital experiences.
+      </h1>
+      <h2 style={{ fontSize: '1.5rem', fontWeight: 400, color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+        Akshaya Chittimilla
+      </h2>
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem', letterSpacing: '1px' }}>
+        Builder &bull; Problem Solver &bull; Developer
+      </p>
+      <div style={{ display: 'flex', gap: '1rem' }}>
+        <MagneticButton className="glass-panel" style={{ padding: '12px 32px', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.1)' }}>
+          Explore My Work
+        </MagneticButton>
+        <MagneticButton className="glass-panel" style={{ padding: '12px 32px', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', background: 'transparent' }}>
+          View Resume
+        </MagneticButton>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
