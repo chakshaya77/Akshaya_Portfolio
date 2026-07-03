@@ -39,7 +39,7 @@ export default function Navbar() {
           className="navbar-brand"
         >
           <img 
-            src="/emblem.png" 
+            src="/emblem-transparent.png" 
             alt="Admin Gateway Emblem" 
             className="navbar-emblem" 
             onClick={handleEmblemClick}
