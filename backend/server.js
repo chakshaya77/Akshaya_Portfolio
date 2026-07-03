@@ -1,4 +1,11 @@
 require('dotenv').config();
+const dns = require('dns');
+
+// Force Node.js to use Google DNS for SRV lookups (fixes ECONNREFUSED on some networks)
+dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+// Prefer IPv4 to avoid IPv6 DNS issues
+dns.setDefaultResultOrder('ipv4first');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -7,29 +14,30 @@ const jwt = require('jsonwebtoken');
 const Project = require('./models/Project');
 
 const app = express();
-app.use(cors());
+
+// Explicit CORS config - allows all origins
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
 // ── MongoDB connection ────────────────────────────────────────────────────────
-// NOTE: If you see "querySrv ECONNREFUSED" locally, it means your local network
-// or OS DNS resolver is blocking SRV record lookups (common in sandboxed/VPN
-// environments). This does NOT affect Render — cloud deployments work normally.
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log('✅  MongoDB connected'))
   .catch((err) => {
     console.error('❌  MongoDB connection error:', err.code || err.message);
-    console.error(
-      '   → If you see ECONNREFUSED locally, check your DNS / network settings.'
-    );
-    console.error('   → On Render (production) this will work automatically.');
+    console.error('   → Your local network DNS may block SRV record lookups.');
+    console.error('   → Render (production) will connect normally.');
   });
 
-// ── Health check ─────────────────────────────────────────────────────────────
+// ── Health check ──────────────────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ status: 'ok', mongoState: mongoose.connection.readyState });
 });
 
 // ── Auth Route ────────────────────────────────────────────────────────────────
@@ -39,12 +47,6 @@ app.post('/api/auth', (req, res) => {
 
   const envAdminId = (process.env.ADMIN_ID || '').trim();
   const envPassword = (process.env.ADMIN_PASSWORD || '').trim();
-
-  // Uncomment temporarily to debug credential mismatches:
-  // console.log('Received adminId:', JSON.stringify(adminId));
-  // console.log('Expected adminId:', JSON.stringify(envAdminId));
-  // console.log('Received password:', JSON.stringify(password));
-  // console.log('Expected password:', JSON.stringify(envPassword));
 
   if (adminId === envAdminId && password === envPassword) {
     const token = jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, {

@@ -26,15 +26,21 @@ export default function AdminGateway({ isOpen, onClose }) {
     setError(false);
     setIsLoading(true);
 
+    // 60-second timeout handles Render free-tier cold starts (server sleeps after 15min idle)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000);
+
     try {
-      const res = await fetch('https://akshaya-portfolio-j22y.onrender.com/api/auth', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ adminId, password })
+        body: JSON.stringify({ adminId, password }),
+        signal: controller.signal,
       });
-      
+
+      clearTimeout(timeoutId);
       const data = await res.json();
-      
+
       if (data.success) {
         localStorage.setItem('adminToken', data.token);
         onClose();
@@ -43,7 +49,15 @@ export default function AdminGateway({ isOpen, onClose }) {
         triggerError();
       }
     } catch (err) {
-      triggerError();
+      clearTimeout(timeoutId);
+      if (err.name === 'AbortError') {
+        // Server timed out (Render cold start) — show a helpful message
+        setError('timeout');
+        setIsShaking(true);
+        setTimeout(() => setIsShaking(false), 500);
+      } else {
+        triggerError();
+      }
     } finally {
       setIsLoading(false);
     }
@@ -98,7 +112,8 @@ export default function AdminGateway({ isOpen, onClose }) {
             </div>
           </div>
 
-          {error && <p className="admin-error-text">Invalid Admin Credentials</p>}
+          {error === true && <p className="admin-error-text">Invalid Admin Credentials</p>}
+          {error === 'timeout' && <p className="admin-error-text">Server waking up — please try again in a moment.</p>}
 
           <button type="submit" className="admin-submit-btn" disabled={isLoading}>
             {isLoading ? 'AUTHENTICATING...' : 'SIGN IN'} <ArrowUpRight size={18} />
