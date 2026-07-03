@@ -56,8 +56,8 @@
 .admin-modal-logo {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
-  margin-bottom: 16px;
+  display: block;
+  margin: 0 auto 16px auto;
 }
 
 .admin-modal-title {
