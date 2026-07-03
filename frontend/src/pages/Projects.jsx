@@ -5,16 +5,37 @@ import SciFiCard from '../components/SciFiCard';
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const defaultProjects = [
+    { 
+      _id: 'default1',
+      name: 'Project Alpha', 
+      description: 'A cinematic web experience built with React and Three.js.', 
+      liveLink: '#', 
+      coverImage: '' 
+    },
+    { 
+      _id: 'default2',
+      name: 'Project Beta', 
+      description: 'An AI-driven analytics dashboard built with Python and TensorFlow.', 
+      liveLink: '#', 
+      coverImage: '' 
+    }
+  ];
 
   useEffect(() => {
     fetch('https://akshaya-portfolio-j22y.onrender.com/api/projects')
       .then(res => res.json())
       .then(data => {
-        setProjects(data);
+        if (Array.isArray(data) && data.length > 0) {
+          setProjects(data);
+        } else {
+          setProjects(defaultProjects);
+        }
         setLoading(false);
       })
       .catch(err => {
         console.error("Error fetching projects:", err);
+        setProjects(defaultProjects);
         setLoading(false);
       });
   }, []);
