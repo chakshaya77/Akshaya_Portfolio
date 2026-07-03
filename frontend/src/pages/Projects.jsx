@@ -23,7 +23,8 @@ const ProjectList = () => {
   ];
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/projects`)
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+    fetch(`${apiUrl}/api/projects`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {

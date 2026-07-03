@@ -31,7 +31,8 @@ export default function AdminGateway({ isOpen, onClose }) {
     const timeoutId = setTimeout(() => controller.abort(), 60000);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${apiUrl}/api/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ adminId, password }),
