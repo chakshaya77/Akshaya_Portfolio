@@ -40,8 +40,8 @@ export default function Navbar() {
           className="navbar-brand"
         >
           <EmblemLogo
-            width={32}
-            height={32}
+            width={48}
+            height={48}
             className="navbar-emblem"
             onClick={handleEmblemClick}
             aria-label="Open Admin Gateway"

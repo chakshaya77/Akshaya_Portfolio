@@ -38,6 +38,18 @@ export default function AdminGateway({ isOpen, onClose }) {
         signal: controller.signal,
       });
 
+      if (!res.ok) {
+        clearTimeout(timeoutId);
+        if (res.status === 401) {
+          triggerError();
+        } else {
+          setError('server-error');
+          setIsShaking(true);
+          setTimeout(() => setIsShaking(false), 500);
+        }
+        return;
+      }
+
       clearTimeout(timeoutId);
       const data = await res.json();
 
@@ -56,7 +68,9 @@ export default function AdminGateway({ isOpen, onClose }) {
         setIsShaking(true);
         setTimeout(() => setIsShaking(false), 500);
       } else {
-        triggerError();
+        setError('server-error');
+        setIsShaking(true);
+        setTimeout(() => setIsShaking(false), 500);
       }
     } finally {
       setIsLoading(false);
@@ -73,7 +87,7 @@ export default function AdminGateway({ isOpen, onClose }) {
     <div className="admin-modal-overlay" onClick={handleClose}>
       <div className={`admin-modal-content ${isShaking ? 'shake' : ''}`}>
         <div className="admin-modal-header">
-          <EmblemLogo width={64} height={64} className="admin-modal-logo" />
+          <EmblemLogo width={110} height={110} className="admin-modal-logo" />
           <h2 className="admin-modal-title">Admin Gateway</h2>
           <p className="admin-modal-subtitle">AUTHENTICATION REQUIRED</p>
         </div>
@@ -114,6 +128,7 @@ export default function AdminGateway({ isOpen, onClose }) {
 
           {error === true && <p className="admin-error-text">Invalid Admin Credentials</p>}
           {error === 'timeout' && <p className="admin-error-text">Server waking up — please try again in a moment.</p>}
+          {error === 'server-error' && <p className="admin-error-text">Cannot connect to server. Please ensure the backend is running.</p>}
 
           <button type="submit" className="admin-submit-btn" disabled={isLoading}>
             {isLoading ? 'AUTHENTICATING...' : 'SIGN IN'} <ArrowUpRight size={18} />
