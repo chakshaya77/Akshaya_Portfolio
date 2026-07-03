@@ -7,7 +7,7 @@ const ProjectList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/projects')
+    fetch('https://akshaya-portfolio-j22y.onrender.com/api/projects')
       .then(res => res.json())
       .then(data => {
         setProjects(data);

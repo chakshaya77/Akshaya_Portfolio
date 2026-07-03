@@ -14,7 +14,7 @@ const UploadProject = ({ token }) => {
     setMessage('Uploading...');
 
     try {
-      const res = await fetch('http://localhost:5000/api/projects', {
+      const res = await fetch('https://akshaya-portfolio-j22y.onrender.com/api/projects', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const ExistingProjects = ({ token }) => {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/projects');
+      const res = await fetch('https://akshaya-portfolio-j22y.onrender.com/api/projects');
       const data = await res.json();
       setProjects(data);
     } catch (err) {
@@ -90,7 +90,7 @@ const ExistingProjects = ({ token }) => {
     if (!window.confirm('Are you sure you want to delete this project?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/projects/${id}`, {
+      const res = await fetch(`https://akshaya-portfolio-j22y.onrender.com/api/projects/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
