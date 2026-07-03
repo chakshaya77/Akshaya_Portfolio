@@ -1,46 +1,196 @@
 import React from 'react';
 
-export default function EmblemLogo({ className, onClick, style }) {
+/**
+ * EmblemLogo — reusable SVG component.
+ * Recreates the exact uploaded emblem:
+ *   - Outer circular ring
+ *   - Inner circular ring
+ *   - Faceless female portrait with wavy hair
+ *   - Two 4-point sparkle stars (left & right)
+ * All white strokes on a transparent background.
+ */
+export default function EmblemLogo({
+  width = 64,
+  height = 64,
+  className = '',
+  style = {},
+  onClick,
+}) {
   return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 100 100" 
-      className={className} 
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 200"
+      width={width}
+      height={height}
+      className={className}
+      style={{ display: 'block', ...style }}
       onClick={onClick}
-      aria-label="Akshaya Emblem"
-      style={{ 
-        background: '#000', 
-        color: '#fff', 
-        borderRadius: '50%',
-        border: '1px solid rgba(255,255,255,0.05)',
-        ...style
-      }}
+      aria-label="Akshaya Chittimilla emblem"
+      role="img"
+      fill="none"
     >
-      {/* Outer Ring */}
-      <circle cx="50" cy="50" r="46" fill="none" stroke="#fff" strokeWidth="1.5" />
-      {/* Inner Ring */}
-      <circle cx="50" cy="50" r="39" fill="none" stroke="#fff" strokeWidth="1" />
-      
-      {/* Left Star */}
-      <path d="M 23 40 L 24 43 L 27 44 L 24 45 L 23 48 L 22 45 L 19 44 L 22 43 Z" fill="#fff" />
-      {/* Right Star */}
-      <path d="M 77 40 L 78 43 L 81 44 L 78 45 L 77 48 L 76 45 L 73 44 L 76 43 Z" fill="#fff" />
+      {/* ── Outer ring ── */}
+      <circle cx="100" cy="100" r="93" stroke="#fff" strokeWidth="3.5" />
 
-      {/* Face outline / Neck */}
-      <path d="M 40 70 C 40 55, 43 50, 43 45 C 43 35, 38 28, 45 22 C 55 12, 60 25, 58 35 C 56 45, 57 55, 57 70" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 43 50 C 48 55, 53 55, 57 50" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-      
-      {/* Left Hair */}
-      <path d="M 45 22 C 30 25, 25 40, 32 55 C 35 60, 30 65, 32 72 C 35 77, 40 72, 40 70" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-      
-      {/* Right Hair */}
-      <path d="M 55 20 C 65 25, 70 35, 65 48 C 62 55, 68 60, 65 68 C 62 75, 57 72, 57 70" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-      
-      {/* Shoulders */}
-      <path d="M 37 71 C 25 75, 20 82, 18 90" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 60 71 C 72 75, 77 82, 79 90" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 37 71 Q 48.5 78 60 71" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 18 90 Q 48.5 105 79 90" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
+      {/* ── Inner ring ── */}
+      <circle cx="100" cy="100" r="82" stroke="#fff" strokeWidth="3" />
+
+      {/* ── Left 4-point sparkle star ── */}
+      {/* centre ≈ (38, 95) */}
+      <path
+        d="M38 84 L40.2 93 L49 95 L40.2 97 L38 106 L35.8 97 L27 95 L35.8 93 Z"
+        fill="#fff"
+        stroke="none"
+      />
+
+      {/* ── Right 4-point sparkle star ── */}
+      {/* centre ≈ (162, 95) */}
+      <path
+        d="M162 84 L164.2 93 L173 95 L164.2 97 L162 106 L159.8 97 L151 95 L159.8 93 Z"
+        fill="#fff"
+        stroke="none"
+      />
+
+      {/* ══════════════════════════════════
+          PORTRAIT — single compound path
+          drawn with white stroke, no fill
+         ══════════════════════════════════ */}
+
+      {/* ── Outer hair silhouette (left side flowing down) ── */}
+      <path
+        d="
+          M 100 38
+          C 82 38, 66 48, 62 62
+          C 58 72, 60 84, 58 94
+          C 56 106, 52 116, 48 128
+          C 46 136, 46 148, 54 156
+          C 62 163, 74 166, 88 168
+        "
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── Outer hair silhouette (right side flowing down) ── */}
+      <path
+        d="
+          M 100 38
+          C 118 38, 134 48, 138 62
+          C 142 72, 140 84, 142 94
+          C 144 106, 148 116, 152 128
+          C 154 136, 154 148, 146 156
+          C 138 163, 126 166, 112 168
+        "
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── Head top curve ── */}
+      <path
+        d="M 74 68 C 76 54, 88 46, 100 46 C 112 46, 124 54, 126 68"
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* ── Face left outline ── */}
+      <path
+        d="M 74 68 C 72 80, 72 92, 74 104 C 76 112, 80 118, 86 122 C 90 126, 95 128, 100 128"
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── Face right outline ── */}
+      <path
+        d="M 126 68 C 128 80, 128 92, 126 104 C 124 112, 120 118, 114 122 C 110 126, 105 128, 100 128"
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── Neck left ── */}
+      <path
+        d="M 91 128 C 90 134, 90 140, 92 148"
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* ── Neck right ── */}
+      <path
+        d="M 109 128 C 110 134, 110 140, 108 148"
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* ── Left shoulder ── */}
+      <path
+        d="M 92 148 C 84 150, 72 154, 60 162 C 52 168, 46 174, 40 182"
+        stroke="#fff"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── Right shoulder ── */}
+      <path
+        d="M 108 148 C 116 150, 128 154, 140 162 C 148 168, 154 174, 160 182"
+        stroke="#fff"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── Hair parting line (top centre) ── */}
+      <path
+        d="M 100 46 C 100 56, 100 68, 100 80"
+        stroke="#fff"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
+      {/* ── Hair strand sweeping across face (left to right) ── */}
+      <path
+        d="M 82 58 C 88 64, 96 70, 104 74 C 110 78, 114 82, 112 88"
+        stroke="#fff"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
+      {/* ── Left wavy hair curl (lower left) ── */}
+      <path
+        d="
+          M 62 120
+          C 58 128, 58 136, 62 142
+          C 66 148, 64 154, 60 160
+          C 56 166, 56 172, 60 178
+        "
+        stroke="#fff"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── Right wavy hair curl (lower right) ── */}
+      <path
+        d="
+          M 138 120
+          C 142 128, 142 136, 138 142
+          C 134 148, 136 154, 140 160
+          C 144 166, 144 172, 140 178
+        "
+        stroke="#fff"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

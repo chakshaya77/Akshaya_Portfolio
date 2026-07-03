@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AdminGateway from './AdminGateway';
+import EmblemLogo from './EmblemLogo';
 import './Navbar.css';
 
 const NAV_ITEMS = [
@@ -38,10 +39,10 @@ export default function Navbar() {
           onClick={() => handleTabClick('')}
           className="navbar-brand"
         >
-          <img 
-            src="/emblem-transparent.png" 
-            alt="Admin Gateway Emblem" 
-            className="navbar-emblem" 
+          <EmblemLogo
+            width={32}
+            height={32}
+            className="navbar-emblem"
             onClick={handleEmblemClick}
             aria-label="Open Admin Gateway"
           />

@@ -53,15 +53,14 @@
 .navbar-emblem {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
   cursor: pointer;
-  transition: transform 250ms ease-out, box-shadow 250ms ease-out;
+  transition: transform 250ms ease-out, filter 250ms ease-out;
+  flex-shrink: 0;
 }
 
 .navbar-emblem:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.10), 0 0 20px rgba(255, 255, 255, 0.08), 0 0 35px rgba(255, 255, 255, 0.05);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
 }
 
 .navbar-emblem:active {
