@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { User, Lock, Eye, EyeOff, ArrowUpRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import EmblemLogo from './EmblemLogo';
 import './AdminGateway.css';
 
 export default function AdminGateway({ isOpen, onClose }) {
@@ -59,7 +58,7 @@ export default function AdminGateway({ isOpen, onClose }) {
     <div className="admin-modal-overlay" onClick={handleClose}>
       <div className={`admin-modal-content ${isShaking ? 'shake' : ''}`}>
         <div className="admin-modal-header">
-          <EmblemLogo className="admin-modal-logo" />
+          <img src="/emblem.png" alt="Emblem" className="admin-modal-logo" />
           <h2 className="admin-modal-title">Admin Gateway</h2>
           <p className="admin-modal-subtitle">AUTHENTICATION REQUIRED</p>
         </div>
