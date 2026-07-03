@@ -1,0 +1,205 @@
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOverlay 300ms ease-out forwards;
+}
+
+.admin-modal-content {
+  width: 520px;
+  max-width: 560px;
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.03);
+  animation: modalEnter 300ms ease-out forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalEnter {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.shake {
+  animation: shakeAnimation 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shakeAnimation {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.admin-modal-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.admin-modal-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.admin-modal-title {
+  font-family: 'Playfair Display', serif; /* Or similar elegant serif */
+  font-weight: 500;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.admin-modal-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.admin-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-input-group label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.admin-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-input-icon {
+  position: absolute;
+  left: 16px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.admin-input-wrapper input {
+  width: 100%;
+  height: 56px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 0 48px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.admin-input-wrapper input:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.admin-password-toggle {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+.admin-password-toggle:hover {
+  color: #fff;
+}
+
+.admin-error-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  text-align: center;
+  margin-top: -8px;
+}
+
+.admin-submit-btn {
+  height: 56px;
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.admin-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.admin-submit-btn:active {
+  transform: scale(0.98);
+}
+
+.admin-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 24px 0;
+}
+
+.admin-return-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+.admin-return-btn:hover {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .admin-modal-content {
+    width: 92vw;
+    padding: 32px 20px;
+  }
+}

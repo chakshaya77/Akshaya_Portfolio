@@ -72,7 +72,7 @@ const InteractiveCard = ({ children, className = '', style = {} }) => {
           : 'var(--glass-bg)',
       }}
       transition={{ type: 'spring', damping: 20, stiffness: 200 }}
-      className={`glass-panel ${className}`}
+      className={`glass-card ${className}`}
     >
       {/* Inner radial light tracking cursor */}
       <motion.div

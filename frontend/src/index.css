@@ -8,8 +8,8 @@
   
   /* Borders & Glass */
   --border-color: rgba(255, 255, 255, 0.12);
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-hover: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-hover: rgba(25, 25, 25, 0.8);
   
   /* Shadows */
   --shadow-glow: 0 4px 30px rgba(255, 255, 255, 0.03);
@@ -45,20 +45,59 @@ a {
 }
 
 /* Glassmorphism Utilities */
-.glass-panel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  box-shadow: var(--shadow-glow);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+.glass-card{
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.025),
+rgba(255,255,255,.005)
+),
+rgba(10,10,10,.50);
+backdrop-filter:blur(22px) saturate(140%);
+-webkit-backdrop-filter:blur(22px) saturate(140%);
+border:1px solid rgba(255,255,255,.07);
+border-radius:24px;
+box-shadow:
+0 30px 80px rgba(0,0,0,.45),
+0 8px 24px rgba(0,0,0,.25),
+inset 0 1px 0 rgba(255,255,255,.05),
+inset 0 -1px 0 rgba(255,255,255,.015);
+transition:
+all .45s cubic-bezier(.22,.61,.36,1);
+overflow:hidden;
+position:relative;
 }
 
-.glass-panel:hover {
-  background: var(--glass-hover);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(255, 255, 255, 0.2);
+.glass-card::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(
+circle at 75% 55%,
+rgba(255,255,255,.06),
+transparent 45%
+);
+filter:blur(80px);
+pointer-events:none;
+}
+
+.glass-card:hover{
+transform:translateY(-6px);
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.03),
+rgba(255,255,255,.01)
+),
+rgba(15,15,15,.60);
+backdrop-filter:blur(26px) saturate(150%);
+border:1px solid rgba(255,255,255,.12);
+box-shadow:
+0 40px 100px rgba(0,0,0,.55),
+0 16px 32px rgba(0,0,0,.35),
+inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 /* Three.js Canvas Container */
@@ -185,18 +224,4 @@ a {
   font-family: 'Inter', sans-serif;
 }
 
-/* Custom Glassmorphism Card Core classes */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
-}
 
-/* Elevate, brighten border, and cast a subtle cosmic drop shadow on hover */
-.glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 40px -10px rgba(255, 255, 255, 0.03);
-}

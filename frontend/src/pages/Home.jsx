@@ -17,12 +17,12 @@ const Home = () => {
         Builder &bull; Problem Solver &bull; Developer
       </p>
       <div style={{ display: 'flex', gap: '1rem' }}>
-        <MagneticButton className="glass-panel" style={{ padding: '12px 32px', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.1)' }}>
-          Explore My Work
-        </MagneticButton>
-        <MagneticButton className="glass-panel" style={{ padding: '12px 32px', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', background: 'transparent' }}>
+        <button className="glass-card" style={{ padding: '16px 32px', color: '#000', background: '#fff', borderRadius: '40px', border: 'none', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem', display: 'flex', justifyContent: 'center', minWidth: '200px', cursor: 'pointer' }}>
+          Explore
+        </button>
+        <button className="glass-card" style={{ padding: '16px 32px', color: '#fff', background: 'rgba(10, 10, 10, 0.6)', borderRadius: '40px', border: '1px solid rgba(255, 255, 255, 0.2)', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem', display: 'flex', justifyContent: 'center', minWidth: '200px', cursor: 'pointer' }}>
           View Resume
-        </MagneticButton>
+        </button>
       </div>
     </div>
   );

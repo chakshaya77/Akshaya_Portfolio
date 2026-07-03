@@ -171,7 +171,11 @@ export default function AdvancedCursor() {
     if (!rippleContainerRef.current) return;
     
     const ripple = document.createElement('div');
-    ripple.className = 'absolute border border-white/40 rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2';
+    ripple.style.position = 'absolute';
+    ripple.style.border = '1px solid rgba(255, 255, 255, 0.4)';
+    ripple.style.borderRadius = '50%';
+    ripple.style.pointerEvents = 'none';
+    ripple.style.transform = 'translate(-50%, -50%)';
     ripple.style.left = `${x}px`;
     ripple.style.top = `${y}px`;
     ripple.style.width = '20px';
@@ -200,17 +204,25 @@ export default function AdvancedCursor() {
       {/* Canvas for star-dust trail */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 pointer-events-none z-[9997]"
+        style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 9997 }}
       />
 
       {/* Ripple Container */}
-      <div ref={rippleContainerRef} className="fixed inset-0 pointer-events-none z-[9998] overflow-hidden" />
+      <div ref={rippleContainerRef} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 9998, overflow: 'hidden' }} />
 
       {/* Ambient Nebula Glow */}
       <div
         ref={glowRef}
-        className="fixed top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none z-10 transition-opacity duration-300"
         style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '400px',
+          height: '400px',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          zIndex: 10,
+          transition: 'opacity 0.3s',
           background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 70%)',
           marginLeft: '-200px',
           marginTop: '-200px',
@@ -220,8 +232,17 @@ export default function AdvancedCursor() {
       {/* Halo */}
       <div
         ref={haloRef}
-        className="fixed top-0 left-0 w-8 h-8 border border-white/20 rounded-full pointer-events-none z-[9999] transition-colors transition-transform duration-200"
         style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '32px',
+          height: '32px',
+          border: '1px solid rgba(255,255,255,0.2)',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          zIndex: 9999,
+          transition: 'border-color 0.2s, transform 0.2s',
           marginLeft: '-16px',
           marginTop: '-16px',
           willChange: 'transform'
@@ -231,8 +252,17 @@ export default function AdvancedCursor() {
       {/* Central Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[10000] transition-transform duration-100"
         style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '6px',
+          height: '6px',
+          backgroundColor: '#fff',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          zIndex: 10000,
+          transition: 'transform 0.1s',
           marginLeft: '-3px',
           marginTop: '-3px',
           willChange: 'transform'

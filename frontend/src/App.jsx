@@ -5,6 +5,7 @@ import About from './pages/About';
 import Toolkit from './pages/Toolkit';
 import Projects from './pages/Projects';
 import Connect from './pages/Connect';
+import AdminDashboard from './pages/AdminDashboard';
 import LoadingScreen from './components/LoadingScreen';
 import { useState, useEffect } from 'react';
 
@@ -15,7 +16,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000); // 4 seconds loading screen for cinematic effect
+    }, 6000); // 6 seconds loading screen for cinematic effect
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/toolkit" element={<Toolkit />} />
             <Route path="/projects/*" element={<Projects />} />
             <Route path="/connect" element={<Connect />} />
+            <Route path="/admin/*" element={<AdminDashboard />} />
           </Routes>
         </Layout>
       )}

@@ -2,7 +2,7 @@ import React from 'react';
 
 const SciFiCard = ({ children, title, subtitle, className = '', style = {}, onClick }) => {
   return (
-    <div className={`scifi-card ${className}`} style={style} onClick={onClick}>
+    <div className={`glass-card ${className}`} style={style} onClick={onClick}>
       <div className="scifi-card-content">
         {(title || subtitle) && (
           <div className="scifi-card-header">
