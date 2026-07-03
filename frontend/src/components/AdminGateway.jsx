@@ -42,6 +42,10 @@ export default function AdminGateway({ isOpen, onClose }) {
       if (!res.ok) {
         clearTimeout(timeoutId);
         if (res.status === 401) {
+          try {
+            const errData = await res.json();
+            console.error("Auth Failed - Debug Info:", errData.debug);
+          } catch (e) {}
           triggerError();
         } else {
           setError('server-error');

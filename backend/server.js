@@ -48,13 +48,25 @@ app.post('/api/auth', (req, res) => {
   const envAdminId = (process.env.ADMIN_ID || '').trim();
   const envPassword = (process.env.ADMIN_PASSWORD || '').trim();
 
-  if (adminId === envAdminId && password === envPassword) {
+  // Helper to make ID matching lenient (case-insensitive, ignores all spaces)
+  const normalizeId = (id) => id.replace(/\s+/g, '').toLowerCase();
+
+  // Log to file for debugging
+  require('fs').appendFileSync('auth.log', `[AUTH ATTEMPT] Received ID: "${adminId}", Expected ID: "${envAdminId}", Received PWD: "${password}", Expected PWD: "${envPassword}"\n`);
+
+  if (normalizeId(adminId) === normalizeId(envAdminId) && password === envPassword) {
     const token = jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, {
       expiresIn: '1d',
     });
     return res.json({ token, success: true });
   }
-  return res.status(401).json({ success: false, message: 'Invalid credentials' });
+  
+  // Return debug information to help diagnose the exact mismatch in the browser console
+  return res.status(401).json({ 
+    success: false, 
+    message: 'Invalid credentials',
+    debug: { receivedId: adminId, expectedId: envAdminId, receivedPassword: password, expectedPassword: envPassword }
+  });
 });
 
 // ── Auth middleware ───────────────────────────────────────────────────────────
