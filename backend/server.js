@@ -20,9 +20,13 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Auth Route
 app.post('/api/auth', (req, res) => {
-  const { adminId, password } = req.body;
+  const adminId = req.body.adminId?.trim();
+  const password = req.body.password?.trim();
   
-  if (adminId === process.env.ADMIN_ID && password === process.env.ADMIN_PASSWORD) {
+  const envAdminId = process.env.ADMIN_ID?.trim();
+  const envPassword = process.env.ADMIN_PASSWORD?.trim();
+
+  if (adminId === envAdminId && password === envPassword) {
     const token = jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1d' });
     return res.json({ token, success: true });
   }
