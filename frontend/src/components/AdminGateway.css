@@ -58,6 +58,13 @@
   height: 110px;
   display: block;
   margin: 0 auto 16px auto;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  animation: emblemContinuousPulse 4s infinite ease-in-out;
+}
+
+@keyframes emblemContinuousPulse {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2)); }
+  50% { filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.45)); }
 }
 
 .admin-modal-title {

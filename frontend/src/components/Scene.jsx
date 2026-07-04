@@ -52,9 +52,13 @@ const Galaxy = () => {
   const mouse = useRef(new THREE.Vector2(0, 0));
   const { viewport } = useThree();
 
+  const isMobile = useRef(false);
+
   // Track mouse for interaction
   React.useEffect(() => {
+    isMobile.current = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     const handleMouseMove = (event) => {
+      if (isMobile.current) return;
       mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
     };
@@ -67,9 +71,11 @@ const Galaxy = () => {
       // Rotate the entire galaxy very slowly
       ref.current.rotation.y += delta * 0.02;
       
-      // Gentle parallax based on mouse
-      ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, mouse.current.y * 0.2, 0.05);
-      ref.current.rotation.z = THREE.MathUtils.lerp(ref.current.rotation.z, -mouse.current.x * 0.2, 0.05);
+      // Gentle parallax based on mouse (only on desktop)
+      if (!isMobile.current) {
+        ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, mouse.current.y * 0.2, 0.05);
+        ref.current.rotation.z = THREE.MathUtils.lerp(ref.current.rotation.z, -mouse.current.x * 0.2, 0.05);
+      }
     }
   });
 

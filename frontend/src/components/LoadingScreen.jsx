@@ -127,7 +127,7 @@ const LoadingScreen = () => {
     >
       {/* 3D Particle Scene (Matches background format, shapes uploaded image) */}
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
-        <Canvas camera={{ position: [0, 0, 30], fov: 60 }}>
+        <Canvas camera={{ position: [0, 0, window.innerWidth < 768 ? 45 : 30], fov: 60 }}>
           <color attach="background" args={['#000000']} />
           <Stars />
           <BlackHoleRing />
@@ -155,11 +155,12 @@ const LoadingScreen = () => {
       >
         <div style={{
           fontFamily: 'Outfit, sans-serif',
-          fontSize: '2rem',
+          fontSize: 'clamp(1.2rem, 4vw, 2rem)',
           letterSpacing: '0.2em',
           fontWeight: 300,
-          marginBottom: '1rem',
-          textAlign: 'center'
+          marginBottom: '0.5rem',
+          textAlign: 'center',
+          marginTop: window.innerWidth < 768 ? '-60px' : '0' // Bring circle closer to title on mobile
         }}>
           AKSHAYA CHITTIMILLA
         </div>

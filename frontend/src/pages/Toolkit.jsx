@@ -44,7 +44,7 @@ const Toolkit = () => {
   ];
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 2rem' }}>
+    <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: 'max(4rem, env(safe-area-inset-top)) clamp(1.5rem, 5vw, 2rem) max(4rem, env(safe-area-inset-bottom))' }}>
       {categories.map((cat, idx) => (
         <div key={idx} style={{ marginBottom: '4rem' }}>
           {/* Section Header */}

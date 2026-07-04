@@ -1,6 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function AdvancedCursor() {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouchDevice(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+    };
+    checkTouch();
+    window.addEventListener('resize', checkTouch);
+    return () => window.removeEventListener('resize', checkTouch);
+  }, []);
+
+  if (isTouchDevice) return null;
   const dotRef = useRef(null);
   const haloRef = useRef(null);
   const glowRef = useRef(null);

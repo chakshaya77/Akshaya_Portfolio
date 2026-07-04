@@ -56,11 +56,18 @@
   cursor: pointer;
   transition: transform 250ms ease-out, filter 250ms ease-out;
   flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  animation: emblemContinuousPulse 4s infinite ease-in-out;
+}
+
+@keyframes emblemContinuousPulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.2)); }
+  50% { filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.45)); }
 }
 
 .navbar-emblem:hover {
   transform: scale(1.08);
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.6));
 }
 
 .navbar-emblem:active {
@@ -179,6 +186,17 @@
 }
 
 @media (max-width: 768px) {
+  .navbar-container {
+    padding: 16px 24px;
+  }
+  .navbar-brand {
+    font-size: 1.1rem;
+    gap: 8px;
+  }
+  .navbar-emblem {
+    width: 42px;
+    height: 42px;
+  }
   .navbar-link {
     display: none;
   }

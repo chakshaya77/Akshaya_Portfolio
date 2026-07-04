@@ -42,13 +42,13 @@ const ProjectList = () => {
   }, []);
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 2rem' }}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '3rem', textAlign: 'center' }}>Projects.</h1>
+    <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: 'max(4rem, env(safe-area-inset-top)) clamp(1.5rem, 5vw, 2rem) max(4rem, env(safe-area-inset-bottom))' }}>
+      <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3rem)', marginBottom: '3rem', textAlign: 'center' }}>Projects.</h1>
       
       {loading ? (
         <p style={{ textAlign: 'center' }}>Loading projects...</p>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '2rem' }}>
           {projects.map((proj) => (
             <SciFiCard key={proj._id} style={{ padding: '2rem', display: 'flex', flexDirection: 'column', minHeight: '350px' }}>
               <div 
@@ -77,7 +77,7 @@ const ProjectList = () => {
 
 const ProjectDetail = () => {
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem 2rem' }}>
+    <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto', padding: 'max(4rem, env(safe-area-inset-top)) clamp(1.5rem, 5vw, 2rem) max(4rem, env(safe-area-inset-bottom))' }}>
       <Link to="/projects" style={{ color: 'var(--text-secondary)', textDecoration: 'none', marginBottom: '2rem', display: 'inline-block' }}>&larr; Back to Projects</Link>
       <SciFiCard style={{ padding: '3rem' }}>
         <h1 style={{ marginBottom: '2rem' }}>Project Documentation</h1>
