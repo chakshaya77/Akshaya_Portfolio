@@ -12,7 +12,6 @@ export default function AdvancedCursor() {
     return () => window.removeEventListener('resize', checkTouch);
   }, []);
 
-  if (isTouchDevice) return null;
   const dotRef = useRef(null);
   const haloRef = useRef(null);
   const glowRef = useRef(null);
@@ -31,6 +30,7 @@ export default function AdvancedCursor() {
   const lastSpawnTime = useRef(0);
 
   useEffect(() => {
+    if (isTouchDevice) return;
     // 1. Setup Event Listeners
     const onMouseMove = (e) => {
       mouse.current.x = e.clientX;
@@ -166,7 +166,7 @@ export default function AdvancedCursor() {
       window.removeEventListener('resize', onResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isTouchDevice]);
 
   const spawnParticle = (x, y, dx, dy) => {
     particles.current.push({
@@ -210,6 +210,8 @@ export default function AdvancedCursor() {
       }
     }, 600);
   };
+
+  if (isTouchDevice) return null;
 
   return (
     <>
