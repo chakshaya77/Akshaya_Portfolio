@@ -19,7 +19,6 @@ const Connect = () => {
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 400, color: '#fff', margin: 0, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.02em' }}>Direct Message</h3>
-            <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.3)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SYSTEM: STABLE</span>
           </div>
           
           <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
