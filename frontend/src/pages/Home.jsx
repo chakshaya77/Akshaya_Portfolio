@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <style>{`
@@ -115,7 +117,7 @@ const Home = () => {
         </p>
         
         <div className="hero-buttons">
-          <button className="glass-card" style={{ flex: '1', padding: '16px 0', color: '#000', background: '#fff', borderRadius: '40px', border: 'none', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.85rem', display: 'flex', justifyContent: 'center', cursor: 'pointer', minWidth: '0' }}>
+          <button onClick={() => { navigate('/projects'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="glass-card" style={{ flex: '1', padding: '16px 0', color: '#000', background: '#fff', borderRadius: '40px', border: 'none', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.85rem', display: 'flex', justifyContent: 'center', cursor: 'pointer', minWidth: '0' }}>
             Explore
           </button>
           <button className="glass-card" style={{ flex: '1', padding: '16px 0', color: '#fff', background: 'rgba(10, 10, 10, 0.6)', borderRadius: '40px', border: '1px solid rgba(255, 255, 255, 0.2)', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.85rem', display: 'flex', justifyContent: 'center', cursor: 'pointer', minWidth: '0' }}>
