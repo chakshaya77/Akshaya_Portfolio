@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { portfolioConfig } from '../portfolioConfig';
 
 const Connect = () => {
+  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    emailjs.sendForm('service_bwcyi2o', 'template_kof6op9', form.current, 'Nah8TO1OLmkuuU2mD')
+      .then((result) => {
+          setIsSubmitting(false);
+          setSubmitStatus('success');
+          form.current.reset();
+          setTimeout(() => setSubmitStatus(null), 5000);
+      }, (error) => {
+          setIsSubmitting(false);
+          setSubmitStatus('error');
+          setTimeout(() => setSubmitStatus(null), 5000);
+      });
+  };
   return (
     <div style={{ width: '100%', minHeight: 'calc(100vh - 100px)', padding: 'max(4rem, env(safe-area-inset-top)) clamp(1.5rem, 5vw, 2rem) max(4rem, env(safe-area-inset-bottom))', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
       
@@ -21,31 +43,37 @@ const Connect = () => {
             <h3 style={{ fontSize: '1.5rem', fontWeight: 400, color: '#fff', margin: 0, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.02em' }}>Direct Message</h3>
           </div>
           
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>NAME</label>
-              <input type="text" placeholder="e.g. John Doe" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
+          <form ref={form} onSubmit={sendEmail}>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>NAME</label>
+                <input type="text" name="name" required placeholder="e.g. John Doe" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
+              </div>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>EMAIL</label>
+                <input type="email" name="email" required placeholder="e.g. john@example.com" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
+              </div>
             </div>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>EMAIL</label>
-              <input type="email" placeholder="e.g. john@example.com" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
+
+            <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SUBJECT</label>
+              <input type="text" name="subject" required placeholder="e.g. Partnership Opportunity" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
             </div>
-          </div>
 
-          <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SUBJECT</label>
-            <input type="text" placeholder="e.g. Partnership Opportunity" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
-          </div>
+            <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>MESSAGE</label>
+              <textarea name="message" required placeholder="Describe your project, timeline, and structural scope..." style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', minHeight: '130px', resize: 'vertical', outline: 'none' }}></textarea>
+            </div>
 
-          <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>MESSAGE</label>
-            <textarea placeholder="Describe your project, timeline, and structural scope..." style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', minHeight: '130px', resize: 'vertical', outline: 'none' }}></textarea>
-          </div>
-
-          <button style={{ width: '100%', padding: '18px', background: '#fff', color: '#000', border: 'none', borderRadius: '50px', fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.15em', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', transition: 'transform 0.2s', textTransform: 'uppercase' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-            SEND MESSAGE
-          </button>
+            <button type="submit" disabled={isSubmitting} style={{ width: '100%', padding: '18px', background: submitStatus === 'success' ? '#4caf50' : submitStatus === 'error' ? '#f44336' : '#fff', color: submitStatus ? '#fff' : '#000', border: 'none', borderRadius: '50px', fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.15em', cursor: isSubmitting ? 'not-allowed' : 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', transition: 'all 0.3s ease', textTransform: 'uppercase', opacity: isSubmitting ? 0.7 : 1 }}>
+              {submitStatus === 'success' ? 'MESSAGE SENT' : submitStatus === 'error' ? 'ERROR SENDING' : isSubmitting ? 'SENDING...' : (
+                <>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  SEND MESSAGE
+                </>
+              )}
+            </button>
+          </form>
           
         </div>
 
