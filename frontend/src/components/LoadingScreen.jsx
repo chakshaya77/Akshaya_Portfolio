@@ -154,24 +154,31 @@ const LoadingScreen = () => {
         }}
       >
         <div style={{
-          fontFamily: 'Outfit, sans-serif',
-          fontSize: 'clamp(1.2rem, 4vw, 2rem)',
-          letterSpacing: '0.2em',
-          fontWeight: 300,
-          marginBottom: '0.5rem',
-          textAlign: 'center',
-          marginTop: window.innerWidth < 768 ? '-60px' : '0' // Bring circle closer to title on mobile
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transform: window.innerWidth < 768 ? 'translateY(-15px)' : 'none' // Optical centering for mobile
         }}>
-          AKSHAYA CHITTIMILLA
-        </div>
-        <div style={{
-          fontFamily: 'Inter, sans-serif',
-          fontSize: '0.9rem',
-          color: 'rgba(255, 255, 255, 0.5)',
-          letterSpacing: '0.1em',
-          textAlign: 'center'
-        }}>
-          Initializing Portfolio...
+          <div style={{
+            fontFamily: 'Outfit, sans-serif',
+            fontSize: 'clamp(1.2rem, 4vw, 2rem)',
+            letterSpacing: '0.2em',
+            fontWeight: 300,
+            marginBottom: '0.5rem',
+            textAlign: 'center'
+          }}>
+            AKSHAYA CHITTIMILLA
+          </div>
+          <div style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.9rem',
+            color: 'rgba(255, 255, 255, 0.5)',
+            letterSpacing: '0.1em',
+            textAlign: 'center'
+          }}>
+            Initializing Portfolio...
+          </div>
         </div>
       </motion.div>
     </motion.div>
