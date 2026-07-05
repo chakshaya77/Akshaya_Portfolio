@@ -16,27 +16,27 @@ const Home = () => {
         }
         .hero-name {
           font-weight: 600;
-          font-size: 44px;
+          font-size: 38px;
           letter-spacing: -1px;
           color: #ffffff;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
         }
         .hero-role {
           text-transform: uppercase;
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 500;
-          letter-spacing: 8px;
+          letter-spacing: 7px;
           color: rgba(255, 255, 255, 0.62);
-          margin-bottom: 40px;
+          margin-bottom: 34px;
         }
         .hero-heading {
-          font-size: clamp(64px, 8vw, 104px);
+          font-size: clamp(56px, 6.2vw, 82px);
           font-weight: 700;
-          line-height: 0.95;
-          letter-spacing: -4px;
-          max-width: 1000px;
+          line-height: 0.96;
+          letter-spacing: -3px;
+          max-width: 900px;
           color: #ffffff;
-          margin-bottom: 34px;
+          margin-bottom: 0px;
         }
         .hero-divider {
           display: flex;
@@ -45,15 +45,16 @@ const Home = () => {
           width: 380px;
           max-width: 100%;
           opacity: 0.3;
-          margin-bottom: 22px;
+          margin-top: 20px;
+          margin-bottom: 20px;
         }
         .hero-statement {
-          font-size: 26px;
+          font-size: 22px;
           font-weight: 400;
-          line-height: 1.6;
+          line-height: 1.55;
           color: rgba(255, 255, 255, 0.72);
-          max-width: 700px;
-          margin-bottom: 48px;
+          max-width: 640px;
+          margin-bottom: 44px;
         }
         .hero-buttons {
           display: flex;
