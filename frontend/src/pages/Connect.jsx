@@ -18,34 +18,34 @@ const Connect = () => {
         <div className="glass-card" style={{ flex: '1 1 600px', padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 400, color: '#fff', margin: 0, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.02em' }}>Direct Message console</h3>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 400, color: '#fff', margin: 0, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.02em' }}>Direct Message</h3>
             <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.3)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SYSTEM: STABLE</span>
           </div>
           
           <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SENDER NAME</label>
+              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>NAME</label>
               <input type="text" placeholder="e.g. John Doe" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
             </div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SENDER COORDINATE (EMAIL)</label>
+              <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>EMAIL</label>
               <input type="email" placeholder="e.g. john@example.com" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
             </div>
           </div>
 
           <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>MESSAGE SUBJECT</label>
+            <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SUBJECT</label>
             <input type="text" placeholder="e.g. Partnership Opportunity" style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', outline: 'none' }} />
           </div>
 
           <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>SIGNAL MESSAGE</label>
+            <label style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>MESSAGE</label>
             <textarea placeholder="Describe your project, timeline, and structural scope..." style={{ width: '100%', background: '#111', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '16px 18px', color: '#fff', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', minHeight: '130px', resize: 'vertical', outline: 'none' }}></textarea>
           </div>
 
           <button style={{ width: '100%', padding: '18px', background: '#fff', color: '#000', border: 'none', borderRadius: '50px', fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.15em', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', transition: 'transform 0.2s', textTransform: 'uppercase' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-            SEND TRANSMISSION
+            SEND MESSAGE
           </button>
           
         </div>
@@ -56,7 +56,7 @@ const Connect = () => {
           {/* Direct Lines */}
           <div className="glass-card" style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
             <div style={{ marginBottom: '2rem', borderBottom: '1px solid rgba(255, 255, 255, 0.05)', paddingBottom: '1.5rem' }}>
-              <h3 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'rgba(255,255,255,0.4)', margin: 0, fontFamily: 'Inter, sans-serif', letterSpacing: '0.2em', textTransform: 'uppercase' }}>DIRECT LINES</h3>
+              <h3 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'rgba(255,255,255,0.4)', margin: 0, fontFamily: 'Inter, sans-serif', letterSpacing: '0.2em', textTransform: 'uppercase' }}>GET IN TOUCH</h3>
             </div>
             
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '2rem' }}>
@@ -76,7 +76,7 @@ const Connect = () => {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               </div>
               <div>
-                <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.3)', marginBottom: '6px', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>COORDINATES</div>
+                <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.3)', marginBottom: '6px', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>LOCATION</div>
                 <div style={{ fontSize: '0.95rem', color: '#fff', marginBottom: '6px', fontFamily: 'Inter, sans-serif' }}>{portfolioConfig.location}</div>
               </div>
             </div>
@@ -85,7 +85,7 @@ const Connect = () => {
           {/* Presence Matrix */}
           <div className="glass-card" style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
             <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'rgba(255,255,255,0.4)', margin: 0, fontFamily: 'Inter, sans-serif', letterSpacing: '0.2em', textTransform: 'uppercase' }}>PRESENCE MATRIX</h3>
+              <h3 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'rgba(255,255,255,0.4)', margin: 0, fontFamily: 'Inter, sans-serif', letterSpacing: '0.2em', textTransform: 'uppercase' }}>QUICK ACCESS</h3>
             </div>
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
