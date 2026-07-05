@@ -158,19 +158,23 @@ const LoadingScreen = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          transform: window.innerWidth < 768 ? 'translateY(-15px)' : 'none' // Optical centering for mobile
+          position: 'relative'
         }}>
           <div style={{
             fontFamily: 'Outfit, sans-serif',
             fontSize: 'clamp(1.2rem, 4vw, 2rem)',
             letterSpacing: '0.2em',
             fontWeight: 300,
-            marginBottom: '0.5rem',
+            marginBottom: window.innerWidth < 768 ? '0' : '0.5rem',
             textAlign: 'center'
           }}>
             AKSHAYA CHITTIMILLA
           </div>
           <div style={{
+            position: window.innerWidth < 768 ? 'absolute' : 'static',
+            top: window.innerWidth < 768 ? '100%' : 'auto',
+            marginTop: window.innerWidth < 768 ? '0.5rem' : '0',
+            width: '100%',
             fontFamily: 'Inter, sans-serif',
             fontSize: '0.9rem',
             color: 'rgba(255, 255, 255, 0.5)',
