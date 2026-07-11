@@ -12,6 +12,8 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
 const Project = require('./models/Project');
+const Category = require('./models/Category');
+const Tool = require('./models/Tool');
 
 const app = express();
 
@@ -105,6 +107,92 @@ app.delete('/api/projects/:id', verifyAdmin, async (req, res) => {
   try {
     await Project.findByIdAndDelete(req.params.id);
     res.json({ message: 'Project deleted' });
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ── Categories routes ─────────────────────────────────────────────────────────
+app.get('/api/categories', async (_req, res) => {
+  try {
+    const categories = await Category.find().sort({ createdAt: 1 });
+    res.json(categories);
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.post('/api/categories', verifyAdmin, async (req, res) => {
+  try {
+    const { name } = req.body;
+    const newCategory = new Category({ name });
+    await newCategory.save();
+    res.status(201).json(newCategory);
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.put('/api/categories/:id', verifyAdmin, async (req, res) => {
+  try {
+    const { name } = req.body;
+    const category = await Category.findByIdAndUpdate(req.params.id, { name }, { new: true });
+    res.json(category);
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.delete('/api/categories/:id', verifyAdmin, async (req, res) => {
+  try {
+    const { action, targetCategoryId } = req.query;
+    if (action === 'move' && targetCategoryId) {
+      await Tool.updateMany({ categoryId: req.params.id }, { categoryId: targetCategoryId });
+    } else {
+      await Tool.deleteMany({ categoryId: req.params.id });
+    }
+    await Category.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Category deleted' });
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ── Tools routes ──────────────────────────────────────────────────────────────
+app.get('/api/tools', async (_req, res) => {
+  try {
+    const tools = await Tool.find().sort({ createdAt: 1 });
+    res.json(tools);
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.post('/api/tools', verifyAdmin, async (req, res) => {
+  try {
+    const { name, categoryId } = req.body;
+    const newTool = new Tool({ name, categoryId });
+    await newTool.save();
+    res.status(201).json(newTool);
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.put('/api/tools/:id', verifyAdmin, async (req, res) => {
+  try {
+    const { name, categoryId } = req.body;
+    const tool = await Tool.findByIdAndUpdate(req.params.id, { name, categoryId }, { new: true });
+    res.json(tool);
+  } catch {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.delete('/api/tools/:id', verifyAdmin, async (req, res) => {
+  try {
+    await Tool.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Tool deleted' });
   } catch {
     res.status(500).json({ message: 'Server error' });
   }
