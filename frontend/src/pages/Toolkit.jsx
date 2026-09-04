@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SciFiCard from '../components/SciFiCard';
-import { Icon } from '@iconify/react';
-import { Terminal } from 'lucide-react';
+import ToolIcon from '../components/ToolIcon';
 
 const Toolkit = () => {
   const [categories, setCategories] = useState([]);
@@ -31,7 +30,6 @@ const Toolkit = () => {
     return <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: 'max(4rem, env(safe-area-inset-top)) clamp(1.5rem, 5vw, 2rem) max(4rem, env(safe-area-inset-bottom))', color: '#fff', textAlign: 'center' }}>Loading toolkit...</div>;
   }
 
-  const resolveIconName = (name) => name.toLowerCase().replace(/[^a-z0-9]/g, '');
 
   return (
     <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: 'max(4rem, env(safe-area-inset-top)) clamp(1.5rem, 5vw, 2rem) max(4rem, env(safe-area-inset-bottom))' }}>
@@ -52,15 +50,7 @@ const Toolkit = () => {
               {catTools.map((tool, i) => (
                 <SciFiCard key={tool._id || i} style={{ padding: '3rem 1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', aspectRatio: '1/1', cursor: 'pointer' }}>
                   <div style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '36px' }}>
-                    <Icon 
-                      icon={`logos:${resolveIconName(tool.name)}`} 
-                      width="36" height="36" 
-                      onLoad={(e) => { e.currentTarget.style.display = 'block'; e.currentTarget.nextSibling.style.display = 'none'; }}
-                      onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'block'; }}
-                    />
-                    <div style={{ display: 'none' }}>
-                      <Terminal size={36} strokeWidth={1.5} />
-                    </div>
+                    <ToolIcon name={tool.name} size={36} />
                   </div>
                   <div style={{ fontSize: '0.7rem', letterSpacing: '0.15em', color: '#fff', textAlign: 'center', textTransform: 'uppercase', fontWeight: 500 }}>
                     {tool.name}

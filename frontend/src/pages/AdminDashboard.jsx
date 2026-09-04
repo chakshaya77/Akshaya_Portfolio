@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import SciFiCard from '../components/SciFiCard';
-import { Icon } from '@iconify/react';
+import ToolIcon from '../components/ToolIcon';
 import { Terminal } from 'lucide-react';
 
 const UploadProject = ({ token }) => {
@@ -209,13 +209,11 @@ const UploadToolStack = ({ token }) => {
     }
   };
 
-  const resolveIconName = (name) => name.toLowerCase().replace(/[^a-z0-9]/g, '');
-
   return (
     <div>
       <h2 style={{ marginBottom: '2rem' }}>Upload Tool Stack</h2>
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1, minWidth: '300px' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: '1 1 250px', minWidth: 0 }}>
           <select 
             value={selectedCategory} 
             onChange={(e) => {
@@ -242,21 +240,11 @@ const UploadToolStack = ({ token }) => {
           {message && <p style={{ color: 'rgba(255,255,255,0.8)' }}>{message}</p>}
         </form>
 
-        <div style={{ flex: 1, minWidth: '300px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ flex: '1 1 250px', minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <h3 style={{ marginBottom: '1rem', color: 'rgba(255,255,255,0.6)', fontSize: '1rem' }}>Live Preview</h3>
-          <SciFiCard style={{ padding: '3rem 1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '220px', aspectRatio: '1/1' }}>
+          <SciFiCard style={{ padding: '3rem 1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '220px', aspectRatio: '1/1' }}>
             <div style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '36px' }}>
-              {toolName ? (
-                <Icon 
-                  icon={`logos:${resolveIconName(toolName)}`} 
-                  width="36" height="36" 
-                  onLoad={(e) => { e.currentTarget.style.display = 'block'; e.currentTarget.nextSibling.style.display = 'none'; }}
-                  onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'block'; }}
-                />
-              ) : null}
-              <div style={{ display: toolName ? 'none' : 'block' }}>
-                <Terminal size={36} strokeWidth={1.5} />
-              </div>
+              <ToolIcon name={toolName} size={36} />
             </div>
             <div style={{ fontSize: '0.7rem', letterSpacing: '0.15em', color: '#fff', textAlign: 'center', textTransform: 'uppercase', fontWeight: 500 }}>
               {toolName || 'Tool Name'}
@@ -442,7 +430,7 @@ const ExistingToolStack = ({ token }) => {
           {catTools.map(tool => (
             <div key={tool._id} style={{ padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <Icon icon={`logos:${tool.name.toLowerCase().replace(/[^a-z0-9]/g, '')}`} width="24" height="24" />
+                <ToolIcon name={tool.name} size={24} />
                 <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{tool.name}</h3>
               </div>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -474,7 +462,7 @@ const ExistingToolStack = ({ token }) => {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
         {filteredCategories.length === 0 ? <p>No Toolkit Categories Found</p> : null}
         {filteredCategories.map(cat => {
           const catTools = tools.filter(t => t.categoryId === cat._id);
@@ -485,10 +473,10 @@ const ExistingToolStack = ({ token }) => {
                 <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{cat.name}</h3>
               </div>
               <p style={{ margin: '0 0 1.5rem 0', color: 'rgba(255,255,255,0.5)' }}>{catTools.length} Tools</p>
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <button onClick={() => { setSearch(''); setViewingCategory(cat._id); }} style={{ padding: '0.5rem 1rem', flex: 1, background: 'rgba(255,255,255,0.1)', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>View</button>
-                <button onClick={() => handleEditCategory(cat._id, cat.name)} style={{ padding: '0.5rem 1rem', flex: 1, background: 'rgba(255,255,255,0.1)', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Edit</button>
-                <button onClick={() => handleDeleteCategory(cat._id)} style={{ padding: '0.5rem 1rem', flex: 1, background: 'rgba(255,0,0,0.2)', color: '#ff4444', border: '1px solid rgba(255,0,0,0.3)', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <button onClick={() => { setSearch(''); setViewingCategory(cat._id); }} style={{ padding: '0.5rem 1rem', flex: '1 1 auto', background: 'rgba(255,255,255,0.1)', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>View</button>
+                <button onClick={() => handleEditCategory(cat._id, cat.name)} style={{ padding: '0.5rem 1rem', flex: '1 1 auto', background: 'rgba(255,255,255,0.1)', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Edit</button>
+                <button onClick={() => handleDeleteCategory(cat._id)} style={{ padding: '0.5rem 1rem', flex: '1 1 auto', background: 'rgba(255,0,0,0.2)', color: '#ff4444', border: '1px solid rgba(255,0,0,0.3)', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>
               </div>
             </div>
           );
